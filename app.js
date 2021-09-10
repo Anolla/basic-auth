@@ -10,7 +10,8 @@ const app = express();
 app.use(express.json());
 
 // creating cloud postgres on Heroku and connecting it with my application
-let POSTGRES_URI ="postgres://uojrxlrtiakavk:bba5fe630a52eef60ea1a6557726df1bab5842369d9f165a91eab3d787970ab1@ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/d151m6s2avllim";
+let POSTGRES_URI =
+  "postgres://uojrxlrtiakavk:bba5fe630a52eef60ea1a6557726df1bab5842369d9f165a91eab3d787970ab1@ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/d151m6s2avllim";
 //POSTGRES_URI from Config Vars on Heroku
 let sequelizeOptions = {
   dialectOptions: {
@@ -38,6 +39,10 @@ const Users = sequelize.define("users", {
 // perform a functionallity before we create and save a new user
 Users.beforeCreate((user) => {
   console.log(user, "user"); // what might we want to do programmiaticall before user data is presisted to the database?
+});
+
+app.get("/", async (req, res) => {
+  res.json("test");
 });
 
 // create a new user
@@ -103,6 +108,6 @@ app.post("/signin", async (req, res) => {
 sequelize
   .sync()
   .then(() => {
-    app.listen(3030, () => console.log("server is up on port 3030"));
+    app.listen(process.env.PORT || 3030, () => console.log("server is up"));
   })
   .catch((err) => console.log(err));
