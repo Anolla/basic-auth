@@ -10,8 +10,7 @@ const app = express();
 app.use(express.json());
 
 // creating cloud postgres on Heroku and connecting it with my application
-let POSTGRES_URI =
-  "postgres://uojrxlrtiakavk:bba5fe630a52eef60ea1a6557726df1bab5842369d9f165a91eab3d787970ab1@ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/d151m6s2avllim";
+let POSTGRES_URI ="postgres://uojrxlrtiakavk:bba5fe630a52eef60ea1a6557726df1bab5842369d9f165a91eab3d787970ab1@ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/d151m6s2avllim";
 //POSTGRES_URI from Config Vars on Heroku
 let sequelizeOptions = {
   dialectOptions: {
