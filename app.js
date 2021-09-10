@@ -22,11 +22,11 @@ const Users = sequelize.define("users", {
   },
 });
 
+
+
 // perform a functionallity before we create and save a new user
 Users.beforeCreate((user) => {
-  console.log(user,'user'); // what might we want to do programmiaticall before user data is presisted to the database?
-
-  // hash the password
+console.log(user,'user'); // what might we want to do programmiaticall before user data is presisted to the database?
 });
 
 // create a new user
@@ -45,23 +45,27 @@ app.post("/signup", async (req, res) => {
 
   let [username, password] = decodedCreditentials.split(":");
 
-  //2- TODO: check if the user already exists
-
+  //2- check if the user already exists
+  const user = await Users.findOne({ where: { username } });
+  if(user){
+    res.json({ error: "User already exists" });
+  }
+  else{
   //3- encrypt password
   let hashedPassword = await bccrypt.hash(password, 10);
 
   //4- create user
   const record = await Users.create({ username, password: hashedPassword });
   res.status(201).json(record);
+  }
+
+
 });
 
 // sign in
 app.post("/signin", async (req, res) => {
-  /*
-   * firs we need to get the credentials from the request
-   */
 
-  //1- get user info from the request.
+  //1- get user the credentials from the request.
   let authHeader = req.headers.authorization;
   // ['Basic username:password']
   console.log(authHeader,'authHeader');
@@ -92,6 +96,6 @@ app.post("/signin", async (req, res) => {
 sequelize
   .sync()
   .then(() => {
-    app.listen(3000, () => console.log("server is up on port 3000"));
+    app.listen(3030, () => console.log("server is up on port 3030"));
   })
   .catch((err) => console.log(err));
