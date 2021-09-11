@@ -1,8 +1,16 @@
-'use strict';
+"use strict";
 
-const ticketModel = (sequelize, DataTypes) => sequelize.define('Tickets', {
-  name: { type: DataTypes.STRING, required: true },
-  type: { type: DataTypes.ENUM('feedback', 'suggestions', 'report'), required: true }
-});
+const tickets = (sequelize, DataTypes) =>
+  sequelize.define("tickets", {
+    name: { type: DataTypes.STRING, required: true },
+    type: {
+      type: DataTypes.ENUM("feedback", "suggestions", "report"),
+      required: true,
+    },
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: "open",
+    },
+  });
 
-module.exports = ticketModel;
+module.exports = tickets;
