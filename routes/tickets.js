@@ -15,9 +15,24 @@ const tickets = ticketsModel(sequelize, DataTypes);
 const { Ticket } = require("../models/index");
 
 //TODO get my tickets
+ticketsRouter.get(
+  "/myTickets",
+  bearerAuth(users),
+  acl("create"),
+  async (req, res) => {
+    const username = req.user.username;
+    let theRecord = await Ticket.getByName(username);
+    if (theRecord.length>0) res.status(200).json(theRecord);
+    else {
+      res.status(404).send("this user has no tickets");
+    }
+  }
+);
+
+
 
 ticketsRouter.get(
-  "/ticket/:id",
+  "/ticket/:id?",
   bearerAuth(users),
   acl("create"),
   async (req, res) => {
@@ -33,9 +48,9 @@ ticketsRouter.post(
   acl("create"),
   async (req, res) => {
     console.log("create access permitted");
-    req.body.userId=req.user.id //taken from the token
-    req.body.name=req.user.username
-    console.log(req.user,'req.body');
+    req.body.userId = req.user.id; //taken from the token
+    req.body.username = req.user.username;
+    console.log(req.user, "req.body");
     let createdTicket = await Ticket.create(req.body);
 
     res.status(201).send(createdTicket);

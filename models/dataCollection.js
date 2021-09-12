@@ -7,6 +7,12 @@ class DataCollection {
     this.model = model;
   }
 
+  getByName(username) {
+    if (username) {
+      return this.model.findAll({ where: {username} });
+    }
+  }
+
   get(id) {
     if (id) {
       return this.model.findOne({ where: { id } });

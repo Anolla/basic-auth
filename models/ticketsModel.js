@@ -2,7 +2,7 @@
 
 const tickets = (sequelize, DataTypes) =>
   sequelize.define("tickets", {
-    name: { type: DataTypes.STRING, required: true },
+    username: { type: DataTypes.STRING, required: true },
     type: {
       type: DataTypes.ENUM("feedback", "suggestions", "report"),
       required: true,
