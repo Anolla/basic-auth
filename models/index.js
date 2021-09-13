@@ -5,7 +5,7 @@ const ticketsModel = require("../models/ticketsModel");
 const { Sequelize, DataTypes } = require("sequelize");
 // const sequelize = new Sequelize(process.env.DATABASE_URL,{});
 let POSTGRES_URI =
-  "postgres://tufgjpdd:U08gtU2ndhXLxps47GogqHXEChatzc91@chunee.db.elephantsql.com/tufgjpdd";
+  "postgres://uojrxlrtiakavk:bba5fe630a52eef60ea1a6557726df1bab5842369d9f165a91eab3d787970ab1@ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/d151m6s2avllim";
 //POSTGRES_URI from Config Vars on Heroku
 let sequelizeOptions = {
   dialectOptions: {
