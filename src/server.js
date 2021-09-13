@@ -18,19 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(authRoutes);
 app.use(ticketsRouter);
 
-// creating cloud postgres on Heroku and connecting it with my application
-// let POSTGRES_URI =
-//   "postgres://tufgjpdd:U08gtU2ndhXLxps47GogqHXEChatzc91@chunee.db.elephantsql.com/tufgjpdd";
-// //POSTGRES_URI from Config Vars on Heroku
-// let sequelizeOptions = {
-//   dialectOptions: {
-//     ssl: {
-//       require: true,
-//       rejectUnauthorized: false,
-//     },
-//   },
-// };
-// let sequelize = new Sequelize(POSTGRES_URI, sequelizeOptions);
+//creating cloud postgres on Heroku and connecting it with my application
 
 // Catchalls
 app.use(notFound);

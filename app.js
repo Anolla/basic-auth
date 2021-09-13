@@ -6,6 +6,6 @@ const { db } = require("./models/index");
 
 db.sync()
   .then(() => {
-    server.start(3000);
+    server.start(process.env.PORT || 8080);
   })
   .catch((err) => console.log(err));
